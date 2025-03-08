@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnGames Hub</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="light-mode">
+    <div class="banner">
+        <div class="banner-content" onclick="goToStart()">
+            <img src="logo.png" alt="LearnGames Hub Logo" id="banner-logo">
+            <h1 id="banner-title">
+                LearnGames Hub
+            </h1>
+        </div>
+        <button class="login-btn" onclick="toggleUserMenu()" title="User Menu" id="login-btn">👤</button>
+        <div class="user-menu" id="user-menu" style="display: none;">
+            <button id="login-option" onclick="goToLogin()">Login</button>
+        </div>
+    </div>
+
+    <div class="account-menu" id="account-menu" style="display: none;">
+        <h3>Account Settings</h3>
+        <label>
+            Theme:
+            <select id="theme" onchange="changeTheme(this.value)">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+        </label>
+        <label>
+            Language:
+            <select id="language" onchange="changeLanguage(this.value)">
+                <option value="en" selected>English</option>
+                <option value="ar">Arabic</option>
+                <option value="zh">Chinese</option>
+                <option value="de">German</option>
+                <option value="ru">Russian</option>
+                <option value="sv">Swedish</option>
+            </select>
+        </label>
+        <label for="profile-image-upload">
+            Profile Image:
+            <input type="file" id="profile-image-upload" accept="image/*" onchange="selectProfileImage(event)">
+        </label>
+        <button onclick="signOut()">Sign Out</button>
+        <button id="remove-account-btn" onclick="showRemoveAccountConfirm()">Remove Account</button>
+        <div id="remove-account-confirm" style="display: none; margin-top: 20px;">
+            <p>I understand that if I click on remove button my account is going to be permanently removed and cannot be recovered.</p>
+            <label>
+                <input type="checkbox" id="remove-confirm-checkbox"> Yes
+            </label>
+            <button onclick="confirmRemoveAccount()">Remove Account</button>
+        </div>
+        <button id="save-btn" onclick="saveProfileImage()">Save</button>
+    </div>
+
+    <div class="content-wrapper" id="content-wrapper">
+        <div class="container" id="main-section">
+            <h2 id="main-title">Get Ready to Learn!</h2>
+            <p class="intro" id="main-intro">Hey there, learner! Pick a subject you’d love to dive into with exciting games.</p>
+            <div id="user-info" style="display: none; margin-bottom: 20px;">
+                <p>Welcome, <span id="user-email"></span></p>
+            </div>
+            <div class="subject-buttons">
+                <button type="button" class="subject-btn" onclick="selectSubject('Math')" id="math-btn">Math</button>
+                <button type="button" class="subject-btn" onclick="selectSubject('Arabic')" id="arabic-btn">Arabic</button>
+            </div>
+            <button class="submit-btn" onclick="submitSubject()" id="lets-go-btn">Let’s Go!</button>
+        </div>
+
+        <div class="container coming-soon" id="coming-soon-section">
+            <h2 id="coming-soon-title">Hold Tight!</h2>
+            <p id="coming-soon-text">Our team is working hard to bring you awesome learning games for <span id="subject-name"></span>. Coming soon!</p>
+            <a class="back-btn" onclick="goBack()" id="back-to-home-btn">Back to Home</a>
+        </div>
+
+        <div class="container" id="math-section">
+            <h2 id="math-games-title">Math Games</h2>
+            <p class="intro" id="math-intro">Ready to tackle some math? Choose an option below!</p>
+            <button class="subject-btn" onclick="startEquationsGame()" id="equations-btn">Equations</button>
+            <a class="back-btn" onclick="goBack()" id="back-to-home-math-btn">Back to Home</a>
+        </div>
+
+        <!-- Equations Game Section -->
+        <div id="equations-game">
+            <canvas id="matrixCanvas"></canvas>
+            <div class="start-page" id="startPage">
+                <h1 id="equation-title">Equation Math Quiz</h1>
+                <p class="grade-text">Enter your level:</p>
+                <input type="number" id="levelInput" min="1" placeholder="1+">
+                <br>
+                <input type="checkbox" id="matrixMode" checked onchange="updateMatrixMode()">
+                <label for="matrixMode">Matrix Mode</label>
+                <br>
+                <input type="checkbox" id="killerMode">
+                <label for="killerMode">Killer Mode</label>
+                <br>
+                <button onclick="startQuiz()">Start Quiz</button>
+                <button class="game-back-btn" onclick="goBackToMath()">Back</button>
+            </div>
+            <div class="quiz-container" id="quizContainer">
+                <h1 id="equation-title">Equation Math Quiz</h1>
+                <p id="timer"></p>
+                <p id="question"></p>
+                <input type="number" id="answer" placeholder="Solve for x">
+                <br>
+                <button onclick="checkAnswer()">Submit</button>
+                <button class="game-back-btn" onclick="goBack()">Back</button>
+                <p id="result"></p>
+                <p id="score"></p>
+            </div>
+            <div class="game-over" id="gameOver">
+                <p id="finalScore"></p>
+                <p>Better luck next time!</p>
+                <button class="game-back-btn" onclick="goBackToMath()">Back</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        window.onload = function() {
+            updateMatrixMode();
+            changeLanguage('en'); // Default to English
+            checkLogin(); // Check if user is logged in
+            loadProfileImage(); // Load profile image on page load
+        };
+    </script>
+</body>
+</html>
