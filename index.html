@@ -6,6 +6,7 @@
     <title>LearnGames Hub</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/6ef9c11615.js" crossorigin="anonymous"></script>
 </head>
 <body class="light-mode">
     <div class="banner">
@@ -90,7 +91,8 @@
             <div class="start-page" id="startPage">
                 <h1 id="equation-title">Equation Math Quiz</h1>
                 <p class="grade-text">Enter your level:</p>
-                <input type="number" id="levelInput" min="1" placeholder="1+">
+                <input type="number" id="levelInput" min="1" max="20" placeholder="1-20">
+                <span class="info-icon" onclick="toggleLevelInfo()"><i class="fa-solid fa-circle-info" style="color: #00ff00;"></i></span>
                 <br>
                 <input type="checkbox" id="matrixMode" checked onchange="updateMatrixMode()">
                 <label for="matrixMode">Matrix Mode</label>
@@ -100,6 +102,17 @@
                 <br>
                 <button onclick="startQuiz()">Start Quiz</button>
                 <button class="game-back-btn" onclick="goBackToMath()">Back</button>
+            </div>
+            <div class="language-selection" style="position: absolute; top: 80px; left: 50%; transform: translateX(-50%); z-index: 2;">
+                <label for="game-language">Language:</label>
+                <select id="game-language" onchange="changeGameLanguage(this.value)">
+                    <option value="en" selected>English</option>
+                    <option value="ar">Arabic</option>
+                    <option value="zh">Chinese</option>
+                    <option value="de">German</option>
+                    <option value="ru">Russian</option>
+                    <option value="sv">Swedish</option>
+                </select>
             </div>
             <div class="quiz-container" id="quizContainer">
                 <h1 id="equation-title">Equation Math Quiz</h1>
@@ -117,6 +130,14 @@
                 <p>Better luck next time!</p>
                 <button class="game-back-btn" onclick="goBackToMath()">Back</button>
             </div>
+            <!-- New Level Info Menu -->
+            <div class="level-info" id="levelInfo" style="display: none;">
+                <h3>Level Information</h3>
+                <div class="level-details" id="levelDetails">
+                    <!-- Populated by JavaScript -->
+                </div>
+                <button onclick="toggleLevelInfo()">Close</button>
+            </div>
         </div>
     </div>
 
@@ -129,5 +150,5 @@
             loadProfileImage(); // Load profile image on page load
         };
     </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'91d93d93ea2344e5',t:'MTc0MTUwOTM0My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
